@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conrad Henry - FHSS 2026 | Chuka University</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset & Base Styles */
+        :root {
+            --primary-dark: #0a0e17;
+            --secondary-dark: #111827;
+            --primary-blue: #1d4ed8;
+            --accent-blue: #3b82f6;
+            --neon-blue: #00d4ff;
+            --light-blue: #60a5fa;
+            --text-light: #f8fafc;
+            --text-gray: #cbd5e1;
+            --glass-bg: rgba(15, 23, 42, 0.7);
+            --glass-border: rgba(56, 189, 248, 0.2);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-light);
+            background-color: var(--primary-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Background Video */
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: blur(3px) brightness(0.7);
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(10, 14, 23, 0.9) 0%, rgba(17, 24, 39, 0.8) 100%);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            z-index: 1001;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .logo img {
+            width: 80%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            position: fixed;
+            top: 25px;
+            left: 20px;
+            width: 40px;
+            height: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            z-index: 1001;
+            transition: var(--transition);
+        }
+
+        .hamburger-line {
+            width: 100%;
+            height: 4px;
+            background-color: var(--text-light);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .hamburger.active .hamburger-line:nth-child(1) {
+            transform: translateY(13px) rotate(45deg);
+        }
+
+        .hamburger.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active .hamburger-line:nth-child(3) {
+            transform: translateY(-13px) rotate(-45deg);
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border-right: 1px solid var(--glass-border);
+            padding: 100px 30px 40px;
+            transition: var(--transition);
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-menu.active {
+            left: 0;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: var(--transition);
+        }
+
+        .nav-menu.active li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .nav-menu li:nth-child(1) { transition-delay: 0.1s; }
+        .nav-menu li:nth-child(2) { transition-delay: 0.2s; }
+        .nav-menu li:nth-child(3) { transition-delay: 0.3s; }
+        .nav-menu li:nth-child(4) { transition-delay: 0.4s; }
+        .nav-menu li:nth-child(5) { transition-delay: 0.5s; }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--neon-blue);
+            transform: translateX(10px);
+        }
+
+        .nav-menu i {
+            margin-right: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 60px;
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, var(--light-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: var(--light-blue);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-img-frame {
+            width: 350px;
+            height: 450px;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow), 0 0 40px rgba(0, 212, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-img-placeholder {
+            width: 100%;
+            height: 100%;
+            background-image: url('https://files.catbox.moe/afhwq1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            color: white;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .hero-img-placeholder::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(to top, rgba(10, 14, 23, 0.9), transparent);
+        }
+
+        /* Typing Section */
+        .typing-container {
+            margin: 60px auto;
+            max-width: 900px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow), 0 0 30px rgba(0, 212, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .typing-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
+
+        .typing-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-gray);
+            min-height: 300px;
+            position: relative;
+        }
+
+        /* SINGLE CURSOR - Updated to only one blue line */
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: var(--neon-blue);
+            margin-left: 2px;
+            vertical-align: middle;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* CTA Button */
+        .cta-section {
+            text-align: center;
+            margin: 50px 0 80px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: var(--shadow), 0 0 20px rgba(0, 212, 255, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), 0 0 30px rgba(0, 212, 255, 0.3);
+            border-color: var(--neon-blue);
+            color: var(--neon-blue);
+        }
+
+        .cta-button i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            margin: 100px 0;
+            padding: 60px 0;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--text-light);
+        }
+
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .stat-card {
+            flex: 1;
+            min-width: 250px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
+            box-shadow: var(--shadow), 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--neon-blue);
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(220, 38, 38, 0.2);
+            color: #39ff14;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #25d366;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        /* FIXED Graph Container - Correct orientation */
+        .graph-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow), 0 0 30px rgba(0, 212, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .graph-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
+
+        .graph-title {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+
+        .graph-wrapper {
+            height: 250px;
+            position: relative;
+            padding: 20px 0 40px;
+        }
+
+        .graph-bars {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end; /* Ensures bars grow from the bottom */
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .bar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            justify-content: flex-end; /* Ensures bar stays at bottom of container */
+            position: relative;
+        }
+
+        .graph-bar {
+            width: 45px;
+            /* Updated to point upwards: Dark blue at bottom, Neon at top */
+            background: linear-gradient(to top, var(--primary-blue), var(--neon-blue));
+            /* Rounded corners on the TOP only */
+            border-radius: 8px 8px 0 0; 
+            transition: var(--transition);
+            position: relative;
+            animation: growBar 1s ease-out forwards;
+            transform-origin: bottom;
+        }
+
+        @keyframes growBar {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        .graph-bar:hover {
+            transform: translateY(-5px) scaleY(1.05);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            background: linear-gradient(to top, var(--accent-blue), var(--neon-blue));
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--text-light);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .graph-bar:hover .bar-value {
+            opacity: 1;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -35px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            font-weight: 500;
+        }
+
+        .graph-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .grid-line {
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .graph-line-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 40px); /* Adjust height to match bars area */
+            pointer-events: none;
+        }
+
+        .graph-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+            margin-right: 8px;
+        }
+
+        .legend-1 {
+            background: linear-gradient(to top, var(--primary-blue), var(--neon-blue));
+        }
+
+        .legend-2 {
+            background: linear-gradient(to right, var(--primary-blue), var(--neon-blue));
+        }
+
+        /* Countdown Timer */
+        .countdown-section {
+            margin: 100px 0;
+            text-align: center;
+        }
+
+        .countdown-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--text-light);
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .countdown-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 25px 15px;
+            min-width: 120px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .countdown-box:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
+            box-shadow: var(--shadow), 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .countdown-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--neon-blue);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 1rem;
+            color: var(--text-gray);
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid var(--glass-border);
+            padding: 60px 0 30px;
+            margin-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-slogan {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--light-blue), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-name {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .footer-university {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+
+        /* Hashtags Section - Added */
+        .hashtags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .hashtag {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--neon-blue);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            transition: var(--transition);
+        }
+
+        .hashtag:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.2);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            color: var(--neon-blue);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .footer-line {
+            height: 2px;
+            width: 100%;
+            max-width: 500px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            margin-bottom: 30px;
+        }
+
+        .copyright {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .hero-img-frame {
+                width: 300px;
+                height: 400px;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat-card {
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .graph-bar {
+                width: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-content {
+                order: 2;
+            }
+            
+            .hero-image {
+                order: 1;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .hero-img-frame {
+                width: 280px;
+                height: 360px;
+            }
+            
+            .typing-container {
+                padding: 20px;
+                margin: 40px auto;
+            }
+            
+            .typing-text {
+                font-size: 1.1rem;
+            }
+            
+            .countdown-box {
+                min-width: 100px;
+                padding: 20px 10px;
+            }
+            
+            .countdown-value {
+                font-size: 2.5rem;
+            }
+            
+            .stats-title, .countdown-title {
+                font-size: 2rem;
+            }
+            
+            .footer-slogan {
+                font-size: 1.8rem;
+            }
+            
+            .graph-bar {
+                width: 35px;
+            }
+            
+            .graph-legend {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .hashtags {
+                gap: 10px;
+            }
+            
+            .hashtag {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1.3rem;
+            }
+            
+            .hero-img-frame {
+                width: 250px;
+                height: 320px;
+            }
+            
+            .cta-button {
+                font-size: 1.1rem;
+                padding: 15px 30px;
+            }
+            
+            .countdown-box {
+                min-width: 80px;
+                padding: 15px 5px;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+            }
+            
+            .stats-title, .countdown-title {
+                font-size: 1.8rem;
+            }
+            
+            .nav-menu {
+                width: 250px;
+            }
+            
+            .logo {
+                width: 50px;
+                height: 50px;
+                top: 15px;
+                right: 15px;
+            }
+            
+            .graph-bar {
+                width: 30px;
+            }
+            
+            .bar-label {
+                font-size: 0.8rem;
+                bottom: -30px;
+            }
+            
+            .hashtags {
+                gap: 8px;
+            }
+            
+            .hashtag {
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Video -->
+    <video id="video-background" autoplay muted loop playsinline>
+        <source src="https://files.catbox.moe/svvf6l.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <!-- Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </div>
+
+            <!-- Logo -->
+            <div class="logo">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Chuka_University_logo.png/240px-Chuka_University_logo.png" alt="Chuka University Logo">
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="nav-menu" id="nav-menu">
+                <ul>
+                    <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#vision"><i class="fas fa-eye"></i> Vision</a></li>
+                    <li><a href="#stats"><i class="fas fa-chart-line"></i> Stats</a></li>
+                    <li><a href="#live"><i class="fas fa-broadcast-tower"></i> Live</a></li>
+                    <li><a href="#join"><i class="fas fa-users"></i> Join Team</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-container">
+            <div class="hero-content fade-in">
+                <h1 class="hero-title">Conrad Henry</h1>
+                <h2 class="hero-subtitle">Faculty Representative – FHSS 2026</h2>
+                <p class="hero-tagline">Stronger Together. Better With You.</p>
+            </div>
+            <div class="hero-image fade-in">
+                <div class="hero-img-frame">
+                    <div class="hero-img-placeholder">
+                        <!-- Image is set via CSS background-image -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typing Section -->
+    <section class="typing-section">
+        <div class="container">
+            <div class="typing-container fade-in">
+                <div class="typing-text" id="typing-text"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Button -->
+    <section class="cta-section fade-in">
+<div class="container">
+    <a href="https://chat.whatsapp.com/KxcGSLHaYFqD5sN6KbKQ2a" 
+       target="_blank" 
+       class="cta-button">
+        <i class="fab fa-whatsapp"></i> Join Team Conrad – WhatsApp
+    </a>
+</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <h2 class="stats-title fade-in">Campaign Momentum</h2>
+            
+            <div class="stats-container">
+                <div class="stat-card fade-in">
+                    <div class="live-indicator">
+                        <span class="pulse-dot"></span> LIVE
+                    </div>
+                    <div class="stat-number" id="supporter-count">3,847</div>
+                    <div class="stat-label">Students Supporting the Movement</div>
+                </div>
+                
+                <div class="stat-card fade-in">
+                    <div class="stat-number" id="engagement-rate">96%</div>
+                    <div class="stat-label">Student Engagement Rate</div>
+                </div>
+                
+                <div class="stat-card fade-in">
+                    <div class="stat-number" id="days-left">14</div>
+                    <div class="stat-label">Days to Election Day</div>
+                </div>
+            </div>
+            
+            <div class="graph-container fade-in">
+                <h3 class="graph-title">Support Growth (Last 7 Days)</h3>
+                <div class="graph-wrapper">
+                    <div class="graph-grid">
+                        <div class="grid-line"></div>
+                        <div class="grid-line"></div>
+                        <div class="grid-line"></div>
+                        <div class="grid-line"></div>
+                        <div class="grid-line"></div>
+                    </div>
+                    <div class="graph-bars" id="support-graph">
+                        <!-- Graph bars will be generated by JavaScript -->
+                    </div>
+                    <div class="graph-line-container">
+                        <canvas id="graph-line"></canvas>
+                    </div>
+                </div>
+                <div class="graph-legend">
+                    <div class="legend-item">
+                        <div class="legend-color legend-1"></div>
+                        <span>Daily Supporters</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color legend-2"></div>
+                        <span>Growth Trend</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Timer -->
+    <section class="countdown-section" id="live">
+        <div class="container">
+            <h2 class="countdown-title fade-in">Countdown to Election Day</h2>
+            
+            <div class="countdown-container">
+                <div class="countdown-box fade-in">
+                    <div class="countdown-value" id="days">14</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                
+                <div class="countdown-box fade-in">
+                    <div class="countdown-value" id="hours">06</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                
+                <div class="countdown-box fade-in">
+                    <div class="countdown-value" id="minutes">52</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                
+                <div class="countdown-box fade-in">
+                    <div class="countdown-value" id="seconds">18</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <h3 class="footer-slogan fade-in">Stronger Together. Better With You.</h3>
+            <p class="footer-name fade-in">Conrad Henry – FHSS 2026</p>
+            <p class="footer-university fade-in">Chuka University</p>
+            
+            <!-- Hashtags Section - Added -->
+            <div class="hashtags fade-in">
+                <span class="hashtag">#ConradForFHSS2026</span>
+                <span class="hashtag">#StrongerTogether</span>
+                <span class="hashtag">#BetterWithYou</span>
+                <span class="hashtag">#FHSS2026</span>
+                <span class="hashtag">#ChukaUniversity</span>
+            </div>
+            
+            <div class="social-icons fade-in">
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            
+            <div class="footer-line fade-in"></div>
+            
+            <p class="copyright fade-in">&copy; 2026 Conrad Henry Campaign. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for the campaign website
+        document.addEventListener('DOMContentLoaded', function() {
+            // Typing Effect
+            const typingText = document.getElementById('typing-text');
+            const message = `Hello everyone,\n\nMy name is Conrad Henry, and I am honoured to officially declare my candidacy for Faculty Representative – Humanities and Social Sciences (FHSS) 2026.\n\nThis is our moment to rise, redefine, and rebuild a stronger, more inclusive faculty for every student. Together, we can improve access to opportunities, strengthen academic support, enhance communication, and empower innovation.\n\nThis movement is about unity, progress, and purposeful leadership. Your voice matters. Your support matters.\n\nLet us build a future where every FHSS student belongs and thrives.\n\nStronger Together. Better With You.`;
+            
+            let charIndex = 0;
+            const typingSpeed = 40; // milliseconds per character
+            const cursor = '<span class="cursor"></span>';
+            
+            function typeMessage() {
+                if (charIndex < message.length) {
+                    // Handle new lines
+                    if (message.charAt(charIndex) === '\n') {
+                        typingText.innerHTML += '<br>' + cursor;
+                    } else {
+                        typingText.innerHTML = typingText.innerHTML.replace(cursor, '') + message.charAt(charIndex) + cursor;
+                    }
+                    charIndex++;
+                    setTimeout(typeMessage, typingSpeed);
+                }
+            }
+            
+            // Start typing after a short delay
+            setTimeout(typeMessage, 1000);
+            
+            // Hamburger Menu Toggle
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            // Close menu when clicking on a link
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+            
+            // Live Stats Updater
+            const supporterCount = document.getElementById('supporter-count');
+            const engagementRate = document.getElementById('engagement-rate');
+            const daysLeft = document.getElementById('days-left');
+            
+            function updateStats() {
+                // Random supporter count between 2000 and 5000
+                const newCount = Math.floor(Math.random() * (5000 - 3800 + 1)) + 3800;
+                supporterCount.textContent = newCount.toLocaleString();
+                
+                // Random engagement rate between 85% and 99%
+                const newRate = Math.floor(Math.random() * (99 - 90 + 1)) + 90;
+                engagementRate.textContent = newRate + '%';
+            }
+            
+            // Update stats every 5 seconds
+            setInterval(updateStats, 5000);
+            
+            // GENERATE DATES FOR KENYA LOCAL TIME
+            function getKenyaDates() {
+                const dates = [];
+                const now = new Date();
+                // Kenya is UTC+3 (though browser handles local time, this ensures we calculate last 7 days from NOW)
+                for (let i = 6; i >= 0; i--) {
+                    const d = new Date();
+                    d.setDate(now.getDate() - i);
+                    const options = { weekday: 'short', day: 'numeric' };
+                    // If it's the last day (i=0), call it Today, otherwise format it
+                    if (i === 0) {
+                        dates.push('Today');
+                    } else {
+                        dates.push(d.toLocaleDateString('en-GB', options)); // e.g., "Mon 12"
+                    }
+                }
+                return dates;
+            }
+
+            // Create Support Graph
+            const graphContainer = document.getElementById('support-graph');
+            const days = getKenyaDates(); // Dynamic dates based on Kenya/Local time
+            const supportData = [2200, 2450, 2800, 3100, 3500, 3847, 4200];
+            
+            // Find max value for scaling
+            const maxValue = Math.max(...supportData);
+            const minValue = Math.min(...supportData);
+            
+            // Create bars with correct orientation
+            days.forEach((day, index) => {
+                const barContainer = document.createElement('div');
+                barContainer.className = 'bar-container';
+                
+                const bar = document.createElement('div');
+                bar.className = 'graph-bar';
+                
+                // Calculate height percentage (0% to 100%)
+                const dataValue = supportData[index];
+                const heightPercentage = ((dataValue - minValue) / (maxValue - minValue)) * 80 + 20; // 20% to 100%
+                bar.style.height = `${heightPercentage}%`;
+                bar.style.animationDelay = `${index * 0.1}s`;
+                
+                const value = document.createElement('div');
+                value.className = 'bar-value';
+                value.textContent = dataValue.toLocaleString();
+                
+                const label = document.createElement('div');
+                label.className = 'bar-label';
+                label.textContent = day;
+                
+                bar.appendChild(value);
+                barContainer.appendChild(bar);
+                barContainer.appendChild(label);
+                graphContainer.appendChild(barContainer);
+                
+                // Add hover effect
+                bar.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scaleY(1.05)';
+                });
+                
+                bar.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scaleY(1)';
+                });
+            });
+            
+            // Draw line graph on canvas
+            const canvas = document.getElementById('graph-line');
+            const ctx = canvas.getContext('2d');
+            
+            function drawLineGraph() {
+                // Clear canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Set canvas dimensions to match container
+                const container = canvas.parentElement;
+                canvas.width = container.clientWidth;
+                canvas.height = container.clientHeight;
+                
+                // Calculate points for line graph
+                const points = [];
+                const barWidth = 45; // Width of each bar
+                const barSpacing = (canvas.width - (barWidth * days.length)) / (days.length + 1);
+                
+                for (let i = 0; i < supportData.length; i++) {
+                    const x = barSpacing + i * (barWidth + barSpacing) + barWidth / 2;
+                    // Invert Y calculation because canvas 0,0 is top-left
+                    // We want high values at the top (low Y)
+                    const y = canvas.height - 40 - ((supportData[i] - minValue) / (maxValue - minValue)) * (canvas.height - 80);
+                    points.push({x, y});
+                }
+                
+                // Draw gradient line
+                ctx.beginPath();
+                ctx.moveTo(points[0].x, points[0].y);
+                
+                for (let i = 1; i < points.length; i++) {
+                    const xc = (points[i].x + points[i-1].x) / 2;
+                    const yc = (points[i].y + points[i-1].y) / 2;
+                    ctx.quadraticCurveTo(points[i-1].x, points[i-1].y, xc, yc);
+                }
+                
+                ctx.quadraticCurveTo(points[points.length-2].x, points[points.length-2].y, points[points.length-1].x, points[points.length-1].y);
+                
+                // Create gradient for line
+                const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+                gradient.addColorStop(0, 'rgba(29, 78, 216, 0.8)');
+                gradient.addColorStop(1, 'rgba(0, 212, 255, 0.8)');
+                
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 3;
+                ctx.lineJoin = 'round';
+                ctx.lineCap = 'round';
+                ctx.stroke();
+                
+                // Draw points on line
+                points.forEach(point => {
+                    ctx.beginPath();
+                    ctx.arc(point.x, point.y, 6, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                    ctx.fill();
+                    ctx.strokeStyle = 'rgba(0, 212, 255, 1)';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                });
+            }
+            
+            // Initialize line graph
+            setTimeout(drawLineGraph, 100);
+            
+            // Redraw graph on resize
+            window.addEventListener('resize', drawLineGraph);
+            
+            // Countdown Timer to January 29, 2026, 5:07 PM
+            function updateCountdown() {
+                const targetDate = new Date('January 29, 2026 17:07:00').getTime();
+                const now = new Date().getTime();
+                const timeRemaining = targetDate - now;
+                
+                // Calculate days, hours, minutes, seconds
+                // Ensure no negative numbers if date passed
+                const days = Math.max(0, Math.floor(timeRemaining / (1000 * 60 * 60 * 24)));
+                const hours = Math.max(0, Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+                const minutes = Math.max(0, Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60)));
+                const seconds = Math.max(0, Math.floor((timeRemaining % (1000 * 60)) / 1000));
+                
+                // Update countdown display with smooth transitions
+                const daysEl = document.getElementById('days');
+                const hoursEl = document.getElementById('hours');
+                const minutesEl = document.getElementById('minutes');
+                const secondsEl = document.getElementById('seconds');
+                
+                // Add animation class for smooth number transitions
+                if (daysEl.textContent !== days.toString().padStart(2, '0')) {
+                    daysEl.style.opacity = '0.5';
+                    setTimeout(() => {
+                        daysEl.textContent = days.toString().padStart(2, '0');
+                        daysEl.style.opacity = '1';
+                    }, 150);
+                }
+                
+                if (hoursEl.textContent !== hours.toString().padStart(2, '0')) {
+                    hoursEl.style.opacity = '0.5';
+                    setTimeout(() => {
+                        hoursEl.textContent = hours.toString().padStart(2, '0');
+                        hoursEl.style.opacity = '1';
+                    }, 150);
+                }
+                
+                if (minutesEl.textContent !== minutes.toString().padStart(2, '0')) {
+                    minutesEl.style.opacity = '0.5';
+                    setTimeout(() => {
+                        minutesEl.textContent = minutes.toString().padStart(2, '0');
+                        minutesEl.style.opacity = '1';
+                    }, 150);
+                }
+                
+                if (secondsEl.textContent !== seconds.toString().padStart(2, '0')) {
+                    secondsEl.style.opacity = '0.5';
+                    setTimeout(() => {
+                        secondsEl.textContent = seconds.toString().padStart(2, '0');
+                        secondsEl.style.opacity = '1';
+                    }, 150);
+                }
+            }
+            
+            // Initialize and update countdown every second
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            
+            // Fade-in animation on scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Initial check and on scroll
+            checkFade();
+            window.addEventListener('scroll', checkFade);
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Add some initial random stats for visual appeal
+            updateStats();
+            
+            // Simulate live graph updates
+            setInterval(() => {
+                // Randomly update one bar
+                const bars = document.querySelectorAll('.graph-bar');
+                if (bars.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * bars.length);
+                    const randomBar = bars[randomIndex];
+                    
+                    // Only update if it's not the last bar (today)
+                    if (randomIndex < bars.length - 1) {
+                        const currentHeight = parseFloat(randomBar.style.height);
+                        const randomChange = Math.random() * 2 - 1; // -1% to +1%
+                        const newHeight = Math.max(20, Math.min(100, currentHeight + randomChange));
+                        randomBar.style.height = `${newHeight}%`;
+                        
+                        // Update the value display
+                        const valueElement = randomBar.querySelector('.bar-value');
+                        if (valueElement) {
+                            const currentValue = parseInt(valueElement.textContent.replace(/,/g, ''));
+                            const newValue = Math.floor(currentValue * (1 + randomChange/100));
+                            valueElement.textContent = newValue.toLocaleString();
+                        }
+                    }
+                    
+                    // Redraw line graph
+                    drawLineGraph();
+                }
+            }, 4000);
+            
+            // Animate bars on load
+            setTimeout(() => {
+                const bars = document.querySelectorAll('.graph-bar');
+                bars.forEach((bar, index) => {
+                    bar.style.transform = 'scaleY(0)';
+                    bar.style.transformOrigin = 'bottom';
+                    setTimeout(() => {
+                        bar.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.3s ease';
+                        bar.style.transform = 'scaleY(1)';
+                    }, index * 100);
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
